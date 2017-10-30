@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Prova_2.1</string>
+    <string name="app_name">ShoppingList3</string>
     <string name="confirm">Confirm</string>
     <string name="message">Are you sure you want to remove </string>
     <string name="message_2">Are you sure you want to remove %1$s? </string>
     <string name="erase">Erase</string>
     <string name="cancel">Cancel</string>
-    <string name="cannot_write">Could\'nt write list</string>
+    <string name="cannot_write">Couldn\'t write list</string>
     <string name="cannot_read">Couldn\'t read list</string>
 </resources>

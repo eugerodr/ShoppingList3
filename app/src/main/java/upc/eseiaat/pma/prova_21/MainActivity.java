@@ -60,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
             FileInputStream fis = openFileInput(FILENAME);
             byte[] buffer = new byte[MAX_BYTES];
             int nread = fis.read(buffer);
+            String content = new String(buffer, 0, nread);
+            String[] lines = content.split("\n");
+            for (String line : lines) {
+                String[] parts = line.split(";");
+                item_list.add(new ShoppingItem(parts[0], parts[1].equals("true")));
+            }
+            fis.close();
+
         } catch (FileNotFoundException e) {
             Log.i("eugerodr", "readItemList: FileNotFoundException");
         } catch (IOException e) {
@@ -84,11 +92,7 @@ public class MainActivity extends AppCompatActivity {
         btn_add = (Button) findViewById(R.id.btn_add);
         edit_item = (EditText) findViewById(R.id.editBox);
 
-        item_list = new ArrayList<>();
-        item_list.add(new ShoppingItem("Patatas"));
-        item_list.add(new ShoppingItem("Papel WC"));
-        item_list.add(new ShoppingItem("Tortitas"));
-        item_list.add(new ShoppingItem("Pizza"));
+        readItemList();
 
         adapter = new ShoppingListAdapter(this,R.layout.shopping_item, item_list);
 
