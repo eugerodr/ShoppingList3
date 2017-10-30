@@ -7,4 +7,7 @@
     <string name="cancel">Cancel</string>
     <string name="cannot_write">Couldn\'t write list</string>
     <string name="cannot_read">Couldn\'t read list</string>
+    <string name="clear_checked">Clear checked items</string>
+    <string name="clear_all">Clear all items</string>
+    <string name="message_clear">Are you sure you want to clear all items?</string>
 </resources>

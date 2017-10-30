@@ -7,12 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -157,4 +162,58 @@ public class MainActivity extends AppCompatActivity {
         list.smoothScrollToPosition(item_list.size()-1);
     }
 
-}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.clear_checked:
+                clearChecked();
+                return true;
+            case R.id.clear_all:
+                clearAll();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void clearChecked() {
+        int i=0;
+        while (i < item_list.size()) {
+            if (item_list.get(i).isChecked()) {
+                item_list.remove(i);
+            }
+            else {
+                i++;
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
+    private void clearAll() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.confirm);
+        builder.setMessage(R.string.message_clear);
+        builder.setPositiveButton(R.string.erase, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                item_list.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel,null);
+        builder.create().show();
+
+        }
+
+    }
+
+
